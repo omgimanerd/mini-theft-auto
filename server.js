@@ -33,6 +33,10 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'index.html'))
 })
 
+app.get('/video', (request, response) => {
+  response.sendFile(path.join(__dirname, 'video.html'))
+})
+
 io.on('connection', socket => {
   // When a new player joins, the server adds a new player to the game.
   socket.on('new-player', (data, callback) => {
