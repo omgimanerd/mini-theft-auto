@@ -24,7 +24,6 @@ class Game {
   }
 
   update(state) {
-    console.log(state)
   }
 
   sendInput() {

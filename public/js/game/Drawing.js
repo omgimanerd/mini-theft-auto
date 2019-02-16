@@ -9,8 +9,8 @@ class Drawing {
   constructor(context) {
     this.context = context
     this.images = {
-      audi: `${PATH}/audi_64x64.png`,
-      viper: `${PATH}/black_viper_64x64.png`
+      audi: `${PATH}audi_64x64.png`,
+      viper: `${PATH}black_viper_64x64.png`
     }
     this.width = this.context.canvas.width
     this.height = this.context.canvas.height
@@ -18,10 +18,9 @@ class Drawing {
 
   drawPlayer() {
     const myCar = new Image()
-    myCar.src = this.images['audi']
+    myCar.src = this.images.audi
     this.context.drawImage(myCar, 64, 64)
     this.context.fillRect(64, 64, 5, 5)
-    console.log('this was called')
   }
 
 

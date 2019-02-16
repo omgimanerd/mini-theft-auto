@@ -40,7 +40,7 @@ app.get('/video', (request, response) => {
 io.on('connection', socket => {
   // When a new player joins, the server adds a new player to the game.
   socket.on('new-player', (data, callback) => {
-    game.addNewPlayer(data.name, socket)
+    game.addNewPlayer(socket, data.name)
     callback()
   })
 
