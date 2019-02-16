@@ -14,33 +14,42 @@ class Game {
     this.animationFrameId = 0
   }
 
-  init() {
-    this.socket.on('update', this.update)
+  init(name) {
+    this.socket.emit('new-player', {
+      name
+    }, () => {
+      this.socket.on('update', this.update)
+      this.run()
+    })
   }
 
   update(state) {
+    console.log(state)
+  }
 
+  sendInput() {
+    this.socket.emit('player-action', this.input)
   }
 
   draw() {
-
+    this.drawing.drawPlayer()
   }
 
   animate() {
-    this.animationFrameId = window.requestAnimationFrame(this.run)
+    this.animationFrameId = window.requestAnimationFrame(this.run.bind(this))
+  }
+
+  run() {
+    this.sendInput()
+    this.draw()
+    this.animate()
   }
 
   stopAnimation() {
     window.cancelAnimationFrame(this.animationFrameId)
   }
-
-  run() {
-    this.update()
-    this.draw()
-    this.animate()
-  }
 }
 
-if (typeof Game !== 'undefined') {
+if (typeof exports !== 'undefined') {
   module.exports = Game
 }

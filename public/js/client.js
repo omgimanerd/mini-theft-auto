@@ -2,7 +2,7 @@
 /**
  * Client side script that initializes the game.
  *
- * @author alvin.lin.dev@gmail.com (Alvin Lin)
+ * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
 const socket = io()
@@ -13,4 +13,4 @@ const drawing = new Drawing(canvas.getContext('2d'))
 const input = new Input()
 const game = new Game(socket, drawing, input)
 
-game.draw()
+game.init()

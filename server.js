@@ -45,7 +45,8 @@ io.on('connection', socket => {
   })
 
   socket.on('player-action', data => {
-    game.updatePlayer(socket.id, data.keyboardState)
+    console.log(data)
+    // game.updatePlayer(socket.id, data.keyboardState)
   })
 
   // When a player disconnects, remove them from the game.
