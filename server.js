@@ -41,8 +41,7 @@ io.on('connection', socket => {
   })
 
   socket.on('player-action', data => {
-    game.updatePlayer(socket.id, data.keyboardState, data.turretAngle,
-      data.shot, data.timestamp)
+    game.updatePlayer(socket.id, data.keyboardState)
   })
 
   // When a player disconnects, remove them from the game.
@@ -52,8 +51,8 @@ io.on('connection', socket => {
 })
 
 setInterval(() => {
-  // game.update()
-  // game.sendState()
+  game.update()
+  game.sendState()
 }, 1000 / FPS)
 
 // Starts the server.
