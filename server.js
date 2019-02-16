@@ -29,7 +29,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 
 // Routing
 app.get('/', (request, response) => {
-  response.render('index.html')
+  response.sendFile(path.join(__dirname, 'index.html'))
 })
 
 io.on('connection', socket => {
