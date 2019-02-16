@@ -1,0 +1,35 @@
+{
+  "name": "mini-theft-manual",
+  "version": "1.0.0",
+  "description": "Brickhack 5 Submission",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omgimanerd/mini-theft-manual.git"
+  },
+  "author": [
+    "Alvin Lin (omgimanerd) <alvin@omgimanerd.tech>",
+    "Ryan Lei",
+    "Andrew Searns"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omgimanerd/mini-theft-manual/issues"
+  },
+  "homepage": "https://github.com/omgimanerd/mini-theft-manual#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hashmap": "^2.3.0",
+    "lodash": "^4.17.11",
+    "morgan": "^1.9.1",
+    "socket.io": "^2.2.0",
+    "tracking.js": "^0.1.1",
+    "vectors": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.0"
+  }
+}
