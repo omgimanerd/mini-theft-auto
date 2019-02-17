@@ -1,16 +1,16 @@
-/* global io, Drawing, Input, Game */
+/* global io, Game */
 /**
  * Client side script that initializes the game.
  *
- * @author alvin.lin.dev@gmail.com (Alvin Lin)
+ * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
 const socket = io()
 
 const canvas = document.getElementById('canvas')
 
-const drawing = new Drawing(canvas.getContext('2d'))
-const input = new Input()
-const game = new Game(socket, drawing, input)
+const game = new Game(socket, canvas)
 
-game.draw()
+document.getElementById('start').addEventListener('click', () => {
+  game.init()
+})

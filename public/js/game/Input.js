@@ -5,7 +5,9 @@
  */
 
 class Input {
-  constructor() {
+  constructor(element) {
+    this.element = element
+
     this.LEFT_CLICK = false
     this.RIGHT_CLICK = false
     this.MOUSE = []
@@ -37,17 +39,21 @@ class Input {
     switch (event.keyCode) {
     case 37:
     case 65:
+    case 97:
       this.LEFT = true
       break
     case 38:
     case 87:
+    case 199:
       this.UP = true
       break
     case 39:
     case 68:
+    case 100:
       this.RIGHT = true
     case 40:
     case 83:
+    case 115:
       this.DOWN = true
     default:
       break
@@ -82,18 +88,15 @@ class Input {
     this.mouse = [event.offsetX, event.offsetY]
   }
 
-  apply(element) {
-    element.addEventListener('mousedown', this.onMouseDown)
-    element.addEventListener('mouseup', this.onMouseUp)
-    element.addEventListener('keyup', this.onKeyUp)
-    element.addEventListener('keydown', this.onKeyDown)
-    element.addEventListener('mousemove', this.onMouseMove)
+  apply() {
+    this.element.addEventListener('mousedown', this.onMouseDown.bind(this))
+    this.element.addEventListener('mouseup', this.onMouseUp.bind(this))
+    this.element.addEventListener('keyup', this.onKeyUp.bind(this))
+    this.element.addEventListener('keydown', this.onKeyDown.bind(this))
+    this.element.addEventListener('mousemove', this.onMouseMove.bind(this))
   }
 }
 
 if (typeof exports !== 'undefined') {
   module.exports = Input
 }
-
-const i = new Input()
-i.apply(document)
