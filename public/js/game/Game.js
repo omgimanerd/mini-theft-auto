@@ -37,7 +37,8 @@ class Game {
   }
 
   draw() {
-    this.drawing.drawPlayer()
+    this.drawing.clear()
+    this.drawing.drawPlayer(false, 300 , 800, Math.PI / 3)
   }
 
   animate() {
