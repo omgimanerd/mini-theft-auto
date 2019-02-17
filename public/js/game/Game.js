@@ -22,7 +22,7 @@ class Game {
     this.socket.emit('new-player', {
       name
     }, () => {
-      this.socket.on('update', this.update)
+      this.socket.on('update', this.update.bind(this))
       this.run()
     })
   }
@@ -37,7 +37,14 @@ class Game {
   }
 
   draw() {
-    this.drawing.drawPlayer()
+    if (this.self !== null) {
+      console.log(this.self.socketId, this.self.position)
+      this.drawing.clear()
+      this.drawing.drawPlayer(true,
+        this.self.position[0],
+        this.self.position[1],
+        this.self.orientation)
+    }
   }
 
   animate() {
