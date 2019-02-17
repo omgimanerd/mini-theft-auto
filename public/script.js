@@ -52,15 +52,16 @@ window.addEventListener("load", function(e) {
     if (e.data.length !== 0) {
 
       e.data.forEach(function(rect) {
-        console.log(rect);
 	if(rect.color == "top_color") {
 		top_center = {x: rect.x + rect.width/2, y: rect.y + rect.height/2};
   		context.strokeStyle = "rgb(" + top_color.r + ", " + top_color.g + ", " + top_color.b + ")";
   		context.fillStyle = "rgb(" + top_color.r + ", " + top_color.g + ", " + top_color.b + ")";
+		drawLine(top_center, br_center, context)
 	} else if (rect.color == "br_color") {
 		br_center = {x: rect.x + rect.width/2, y: rect.y + rect.height/2};
   		context.strokeStyle = "rgb(" + br_color.r + ", " + br_color.g + ", " + br_color.b + ")";
   		context.fillStyle = "rgb(" + br_color.r + ", " + br_color.g + ", " + br_color.b + ")";
+		drawLine(top_center, br_center, context)
 	} else {
 		bl_center = {x: rect.x + rect.width/2, y: rect.y + rect.height/2};
   		context.strokeStyle = "rgb(" + bl_color.r + ", " + bl_color.g + ", " + bl_color.b + ")";
@@ -107,18 +108,54 @@ window.addEventListener("load", function(e) {
 
     // Update the div's background so we can see which color was selected
     set_swatch.style.backgroundColor = "rgb(" + c.r + ", " + c.g + ", " + c.b + ")";
+    console.log(getColorHue(set_color))
   });
 });
 
 
+function getColorHue(color) {
+  R = color.r/255
+  G = color.g/255
+  B = color.b/255
+  Cmax = Math.max(R, G, B)
+  Cmin = Math.min(R, G, B)
+  delta = Cmax - Cmin
+  Hue = 0
+  if(delta != 0){
+    if(Cmax == R){
+      Hue = 60 * (((G - B)/delta) % 6)
+    } else if(Cmax == G) {
+      Hue = 60 * (((B - R)/delta) + 2)
+    } else {
+      Hue = 60 * (((R - G)/delta) + 4)
+    }
+    if(Hue < 0) {
+      Hue = 360 - Hue
+    }
+  }
 
-// Calculates the Euclidian distance between the target color and the actual color
+  if(Cmax == 0) {
+    Saturation = 0
+  } else {
+    Saturation = delta / Cmax
+  }
+
+  return [Saturation, Hue]
+}
+
+
+// Calculate Hue distance in HSV
 function getColorDistance(target, actual) {
-  return Math.sqrt(
-    (target.r - actual.r) * (target.r - actual.r) +
-    (target.g - actual.g) * (target.g - actual.g) +
-    (target.b - actual.b) * (target.b - actual.b)
-  );
+/*
+  H1 = getColorHue(target)
+  if(H1[0] < .3)
+    return 1000000
+  H2 = getColorHue(actual)
+  if(H2[0] < .5)
+    return 1000000
+  return Math.min(360 - Math.abs(H1[1] - H2[1]), Math.abs(H1[1], H2[1]))
+*/
+  return Math.abs(target.r - actual.r) + Math.abs(target.g - actual.g) + Math.abs(target.b - actual.b)
 }
 
 // Returns the color at the specified x/y location in the webcam video feed
@@ -141,4 +178,11 @@ function getColorAt(webcam, x, y) {
 // Draw a colored rectangle on the canvas
 function drawRect(rect, context) {
   context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+}
+
+function drawLine(start, end, context) {
+  context.beginPath()
+  context.moveTo(start.x, start.y)
+  context.lineTo(end.x, end.y)
+  context.stroke()
 }
