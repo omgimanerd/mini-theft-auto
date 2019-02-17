@@ -5,13 +5,24 @@
   <title>Mini Theft Manual</title>
 
   <link rel='stylesheet' type='text/css' href='/public/css/styles.css' />
-
-  <script src='/socket.io/socket.io.js'></script>
 </head>
 
 <body>
   <canvas id='canvas' width='1000' height='600' tabindex='1'></canvas>
   <button id='start'>Fuck</button>
+
+  <video id='webcam' width='640' height='480' autoplay></video>
+  <div>
+    <input id='purple_tolerance' type='range' value='50' max='255'
+      min='0' step='1' />
+    <input id='red_tolerance' type='range' value='50' max='255'
+      min='0' step='1' />
+  </div>
+  <div class='color' id='purple_selector'></div>
+  <div class='color' id='red_selector'></div>
+
+  <script src='/socket.io/socket.io.js'></script>
+  <script src='/public/tracking.js/tracking-min.js'></script>
 
   <script src='/public/js/game/Viewport.js'></script>
   <script src='/public/js/game/Drawing.js'></script>
