@@ -5,8 +5,6 @@
  * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
-
-
 class Game {
   constructor(socket, canvas) {
     this.socket = socket

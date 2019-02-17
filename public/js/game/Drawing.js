@@ -16,7 +16,7 @@ const IMAGE_NAMES = {
 class Drawing {
   constructor(context) {
     this.context = context
-    this.images = Drawing.createImage()
+    this.images = Drawing.createImages()
     this.width = this.context.canvas.width
     this.height = this.context.canvas.height
   }
@@ -30,7 +30,7 @@ class Drawing {
   static createImages() {
     const images = {}
     for (const name in IMAGE_NAMES) {
-      images[name] = Drawing.createImage(`${PATH}/name`)
+      images[name] = Drawing.createImage(`${PATH}/${IMAGE_NAMES[name]}`)
     }
     return images
   }
@@ -52,11 +52,9 @@ class Drawing {
   }
 
   drawBackground(x, y) {
-    const bg = new Image()
-    bg.src = this.images.tile
     for (let xC = x; xC < x + MAX; xC += TILE_WIDTH) {
       for (let yC = y; yC < y + MAX; yC += TILE_HEIGHT) {
-        this.context.drawImage(bg, xC, yC)
+        this.context.drawImage(this.images.tile, xC, yC)
       }
     }
   }
