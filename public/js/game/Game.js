@@ -1,16 +1,18 @@
-/* global Drawing, Input */
+/* global Drawing, Input, Viewport */
 /**
  * Class encapsulating the client side of the game, handles drawing and
  * updates.
  * @author alvin@omgimanerd.tech (Alvin Lin)
  */
 
+
+
 class Game {
   constructor(socket, canvas) {
     this.socket = socket
     this.drawing = new Drawing(canvas.getContext('2d'))
     this.input = new Input(canvas)
-
+    this.viewport = new Viewport(0, 0, canvas.width, canvas.height)
     this.animationFrameId = 0
 
     this.self = null
@@ -21,14 +23,16 @@ class Game {
     this.input.apply()
     this.socket.emit('new-player', {
       name
-    }, () => {
+    }, (x, y) => {
       this.socket.on('update', this.update.bind(this))
       this.run()
+      this.viewport.setPosition(x, y)
     })
   }
 
   update(state) {
     this.self = state.self
+    this.viewport.update(this.self.position[0], this.self.position[1])
     this.others = state.others
   }
 
@@ -38,11 +42,12 @@ class Game {
 
   draw() {
     if (this.self !== null) {
-      console.log(this.self.socketId, this.self.position)
       this.drawing.clear()
-      this.drawing.drawPlayer(true,
-        this.self.position[0],
-        this.self.position[1],
+      this.drawing.drawBackground(this.viewport.toCanvasX(0),
+        this.viewport.toCanvasY(0))
+      this.drawing.drawPlayer(false,
+        this.viewport.toCanvasX(this.self.position[0]),
+        this.viewport.toCanvasY(this.self.position[1]),
         this.self.orientation)
     }
   }
