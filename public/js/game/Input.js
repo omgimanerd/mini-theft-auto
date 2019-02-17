@@ -29,7 +29,7 @@ class Input {
     this.RIGHT = false
     this.DOWN = false
 
-    this.WHEEL_ORIENTATION = 0
+    this.WHEEL_ORIENTATION = null
   }
 
   onMouseDown(event) {
