@@ -38,7 +38,6 @@ class Game {
 
   draw() {
     if (this.self !== null) {
-      console.log(this.self.socketId, this.self.position)
       this.drawing.clear()
       this.drawing.drawPlayer(true,
         this.self.position[0],
