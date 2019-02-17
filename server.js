@@ -38,7 +38,6 @@ app.get('/video', (request, response) => {
 })
 
 io.on('connection', socket => {
-  // When a new player joins, the server adds a new player to the game.
   socket.on('new-player', (data, callback) => {
     game.addNewPlayer(socket, data.name)
     callback()
@@ -48,7 +47,6 @@ io.on('connection', socket => {
     game.updatePlayerOnInput(socket.id, data)
   })
 
-  // When a player disconnects, remove them from the game.
   socket.on('disconnect', () => {
     game.removePlayer(socket.id)
   })
