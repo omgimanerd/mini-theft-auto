@@ -10,6 +10,7 @@ const MAX = 5000
 const IMAGE_NAMES = {
   audi: 'audi_64x64.png',
   viper: 'black_viper_64x64.png',
+  scrap: 'nut_bolt.jpg',
   tile: 'background.jpg'
 }
 
@@ -48,7 +49,6 @@ class Drawing {
     this.context.drawImage(currentCar,
       -currentCar.width / 2, -currentCar.height / 2)
     this.context.restore()
-    this.context.fillRect(64, 64, 5, 5)
   }
 
   drawBackground(x, y) {
@@ -59,8 +59,12 @@ class Drawing {
     }
   }
 
-  drawPickup() {
-
+  drawScrap(x, y) {
+    this.context.save()
+    this.context.translate(x, y)
+    this.context.drawImage(this.images.scrap,
+      -this.images.width / 2, -this.images.height / 2)
+    this.context.restore()
   }
 
   clear() {

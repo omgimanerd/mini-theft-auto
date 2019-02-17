@@ -14,7 +14,7 @@ class Game {
     this.animationFrameId = 0
 
     this.self = null
-    this.others = null
+    this.players = null
   }
 
   init(name) {
@@ -31,7 +31,7 @@ class Game {
   update(state) {
     this.self = state.self
     this.viewport.update(this.self.position[0], this.self.position[1])
-    this.others = state.others
+    this.players = state.players
   }
 
   sendInput() {
@@ -41,12 +41,22 @@ class Game {
   draw() {
     if (this.self !== null) {
       this.drawing.clear()
-      this.drawing.drawBackground(this.viewport.toCanvasX(0),
+
+      this.drawing.drawBackground(
+        this.viewport.toCanvasX(0),
         this.viewport.toCanvasY(0))
+
       this.drawing.drawPlayer(true,
         this.viewport.toCanvasX(this.self.position[0]),
         this.viewport.toCanvasY(this.self.position[1]),
         this.self.orientation)
+
+      for (const player of this.players) {
+        this.drawing.drawPlayer(false,
+          this.viewport.toCanvasX(player.position[0]),
+          this.viewport.toCanvasY(player.position[1]),
+          player.orientation)
+      }
     }
   }
 
