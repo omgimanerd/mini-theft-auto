@@ -1,3 +1,4 @@
+/* global Drawing, Input */
 /**
  * Class encapsulating the client side of the game, handles drawing and
  * updates.
@@ -5,16 +6,19 @@
  */
 
 class Game {
-  constructor(socket, drawing, input) {
+  constructor(socket, canvas) {
     this.socket = socket
-    this.drawing = drawing
-    this.input = input
+    this.drawing = new Drawing(canvas.getContext('2d'))
+    this.input = new Input(canvas)
+
+    this.animationFrameId = 0
 
     this.self = null
-    this.animationFrameId = 0
+    this.others = null
   }
 
   init(name) {
+    this.input.apply()
     this.socket.emit('new-player', {
       name
     }, () => {
@@ -24,6 +28,8 @@ class Game {
   }
 
   update(state) {
+    this.self = state.self
+    this.others = state.others
   }
 
   sendInput() {

@@ -1,25 +1,43 @@
-<!doctype html>
-<html>
-<head>
-	<title>Test page of image streaming</title>	
-	<script src="../node-modules/tracking-min.js"></script>
-</head>
-<body>
-	<video id="myVideo", width="400", height="300" preload autoplay loop muted></video>
-	<script>
-		var colors = new tracking.ColorTracker(['magenta', 'cyan', 'yellow']);
+<!DOCTYPE html>
 
-		colors.on('track', function(event) {
-			if (event.data.length === 0) {
-			// No colors were detected in this frame.
-			} else {
-			event.data.forEach(function(rect) {
-				console.log(rect.x, rect.y, rect.height, rect.width, rect.color);
-				});
-			}
-		});
+<html lang="en">
 
-		tracking.track('#myVideo', colors);
-	</script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tracking Color Blobs in Webcam Feed Using Tracking.js</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <script src="/public/tracking.js/tracking-min.js"></script>
+    <script src="/public/script.js"></script>
+  </head>
+
+  <body>
+
+    <div class="display">
+      <video id="webcam" width="640" height="480" autoplay></video>
+      <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+
+    <div class="ui">
+
+      <div class="controls">
+
+        <p>Click on the webcam feed to pick a color, then adjust tolerance.</p>
+
+        <div>
+          <label for="top_tolerance">Tolerance:</label>
+          <input id="top_tolerance" type="range" value="50" max="255" min="0" step="1">
+          <input id="br_tolerance" type="range" value="50" max="255" min="0" step="1">
+          <input id="bl_tolerance" type="range" value="50" max="255" min="0" step="1">
+        </div>
+
+      </div>
+
+      <div class="color" id="top_color">Top</div>
+      <div class="color" id="br_color">Top</div>
+      <div class="color" id="bl_color">Top</div>
+
+    </div>
+
+  </body>
+
 </html>
