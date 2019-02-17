@@ -40,7 +40,7 @@ app.get('/video', (request, response) => {
 io.on('connection', socket => {
   socket.on('new-player', (data, callback) => {
     game.addNewPlayer(socket, data.name)
-    callback()
+    callback(100, 100)
   })
 
   socket.on('player-action', data => {
