@@ -16,21 +16,34 @@ class Drawing {
       viper: `${PATH}/black_viper_64x64.png`,
       tile: `${PATH}/background.jpg`
     }
+    this.instImages = Drawing.createImages()
     this.width = this.context.canvas.width
     this.height = this.context.canvas.height
   }
 
-  drawPlayer(isSelf, x, y, orientation) {
+  static createImages() {
     const myCar = new Image()
+    myCar.src = this.images.audi
+    const enemyCar = new Image()
+    enemyCar.src = this.images.viper
+    const instImages = {
+      audiImg: myCar,
+      viperImg: enemyCar
+    }
+    return instImages
+  }
+  drawPlayer(isSelf, x, y, orientation) {
+    let currentCar = null
     if (isSelf) {
-      myCar.src = this.images.audi
+      currentCar = this.instImages.audiImg
     } else {
-      myCar.src = this.images.viper
+      currentCar = this.instImages.viperImg
     }
     this.context.save()
     this.context.translate(x, y)
     this.context.rotate(orientation)
-    this.context.drawImage(myCar, -myCar.width / 2, -myCar.height / 2)
+    this.context.drawImage(currentCar,
+      -currentCar.width / 2, -currentCar.height / 2)
     this.context.restore()
     this.context.fillRect(64, 64, 5, 5)
   }

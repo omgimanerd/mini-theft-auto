@@ -45,7 +45,7 @@ class Game {
       this.drawing.clear()
       this.drawing.drawBackground(this.viewport.toCanvasX(0),
         this.viewport.toCanvasY(0))
-      this.drawing.drawPlayer(false,
+      this.drawing.drawPlayer(true,
         this.viewport.toCanvasX(this.self.position[0]),
         this.viewport.toCanvasY(this.self.position[1]),
         this.self.orientation)
