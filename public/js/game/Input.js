@@ -51,6 +51,7 @@ class Input {
     case 68:
     case 100:
       this.RIGHT = true
+      break
     case 40:
     case 83:
     case 115:
@@ -66,17 +67,22 @@ class Input {
     switch (event.keyCode) {
     case 37:
     case 65:
+    case 97:
       this.LEFT = false
       break
     case 38:
     case 87:
+    case 199:
       this.UP = false
       break
     case 39:
     case 68:
+    case 100:
       this.RIGHT = false
+      break
     case 40:
     case 83:
+    case 115:
       this.DOWN = false
     default:
       break

@@ -17,7 +17,6 @@ class Drawing {
   }
 
   drawPlayer(isSelf, x, y, orientation) {
-
     const myCar = new Image()
     if (isSelf) {
       myCar.src = this.images.audi
